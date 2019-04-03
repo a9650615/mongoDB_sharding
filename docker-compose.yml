@@ -1,10 +1,15 @@
 version: '3'
 
 services:
+  fix-mongodb-permissions:
+    image: 'bitnami/mongodb:latest'
+    user: root
+    command: chown -R 1001:1001 /bitnami && chown -R 1001:1001 /bitnami/*
+    volumes:
+    - ./db:/bitnami
   mongoS1:
     container_name: mongodb_shard1
     image: bitnami/mongodb:latest
-    user: '1000'
     expose:
       - "27017"
     # ports:
@@ -21,7 +26,6 @@ services:
   mongoS2:
     container_name: mongodb_shard2
     image: bitnami/mongodb:latest
-    user: '1000'
     expose:
       - "27017"
     # ports:
@@ -38,7 +42,6 @@ services:
   mongoS3:
     container_name: mongodb_shard3
     image: bitnami/mongodb:latest
-    user: '1000'
     expose:
       - "27017"
     # ports:
@@ -55,7 +58,6 @@ services:
   mongoCfg1:
     container_name: mongodb_config1
     image: bitnami/mongodb:latest
-    user: '1000'
     # ports:
     #   - "27019:27019"
     expose:
@@ -87,7 +89,6 @@ services:
   mongos:
     container_name: mongos
     image: bitnami/mongodb:latest
-    user: '1000'
     hostname: mongos
     depends_on:
       - mongoCfg1 
