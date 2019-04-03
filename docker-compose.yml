@@ -6,9 +6,6 @@ services:
     image: bitnami/mongodb:latest
     expose:
       - "27017"
-    depends_on: 
-      - mongoS2
-      - mongoS3
     # ports:
     #   - "27017:27017"
     hostname: mongos1
@@ -55,8 +52,10 @@ services:
   mongoCfg1:
     container_name: mongodb_config1
     image: bitnami/mongodb:latest
-    ports:
-      - "27019:27019"
+    # ports:
+    #   - "27019:27019"
+    expose:
+      - "27017"
     hostname: mongoCfg1
     # environment:
     #   MONGODB_USERNAME: test
@@ -88,6 +87,7 @@ services:
     depends_on:
       - mongoCfg1 
       # - mongoCfg2
+    command: mongos --configdb partdioConf/mongoCfg1:27017 --port 27017
     ports:
         - "27023:27017"
     expose:
