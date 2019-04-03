@@ -7,5 +7,5 @@ rs.initiate({_id:"partdioConf", configsvr: true, members: [{ _id : 0, host : "mo
 
 Rs Router:
 ```
-sh.addShard("partdio/mongos")
+sh.addShard("partdio/mongoS2")
 ```

@@ -87,9 +87,9 @@ services:
     depends_on:
       - mongoCfg1 
       # - mongoCfg2
-    command: mongos --configdb partdioConf/mongoCfg1:27017 --port 27017
+    command: mongos --configdb partdioConf/mongoCfg1:27017 --port 27017 --bind_ip 127.0.0.1 
     ports:
         - "27023:27017"
-    expose:
-      - "27017"
+    # expose:
+    #   - "27017"
 
