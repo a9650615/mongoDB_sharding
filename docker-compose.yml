@@ -10,6 +10,11 @@ services:
   mongoS1:
     container_name: mongodb_shard1
     image: bitnami/mongodb:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
     restart: always
     expose:
       - "27017"
@@ -22,6 +27,11 @@ services:
   mongoS2:
     container_name: mongodb_shard2
     image: bitnami/mongodb:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
     restart: always
     expose:
       - "27017"
@@ -32,6 +42,11 @@ services:
   mongoS3:
     container_name: mongodb_shard3
     image: bitnami/mongodb:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
     restart: always
     expose:
       - "27017"
@@ -42,6 +57,11 @@ services:
   mongoS4:
     container_name: mongodb_shard4
     image: bitnami/mongodb:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
     restart: always
     expose:
       - "27017"
@@ -52,6 +72,11 @@ services:
   mongoCfg1:
     container_name: mongodb_config1
     image: bitnami/mongodb:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 500M
     restart: always
     # ports:
     #   - "27019:27019"
@@ -69,6 +94,11 @@ services:
   mongoCfg2:
     container_name: mongodb_config2
     image: bitnami/mongodb:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 500M
     restart: always
     expose:
       - "27017"
@@ -79,6 +109,11 @@ services:
   mongos:
     container_name: mongos
     image: bitnami/mongodb:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 300M
     hostname: mongos
     restart: always
     depends_on:
