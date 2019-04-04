@@ -15,7 +15,7 @@ services:
         limits:
           cpus: '2'
           memory: 2G
-    restart: always
+    restart: unless-stopped
     expose:
       - "27017"
     hostname: mongos1
@@ -32,7 +32,7 @@ services:
         limits:
           cpus: '2'
           memory: 2G
-    restart: always
+    restart: unless-stopped
     expose:
       - "27017"
     hostname: mongos2
@@ -47,7 +47,7 @@ services:
         limits:
           cpus: '2'
           memory: 2G
-    restart: always
+    restart: unless-stopped
     expose:
       - "27017"
     hostname: mongos3
@@ -62,7 +62,7 @@ services:
         limits:
           cpus: '2'
           memory: 2G
-    restart: always
+    restart: unless-stopped
     expose:
       - "27017"
     hostname: mongos4
@@ -77,7 +77,7 @@ services:
         limits:
           cpus: '1'
           memory: 500M
-    restart: always
+    restart: unless-stopped
     # ports:
     #   - "27019:27019"
     expose:
@@ -99,7 +99,7 @@ services:
         limits:
           cpus: '1'
           memory: 500M
-    restart: always
+    restart: unless-stopped
     expose:
       - "27017"
     hostname: mongoCfg2
@@ -115,7 +115,7 @@ services:
           cpus: '1'
           memory: 300M
     hostname: mongos
-    restart: always
+    restart: unless-stopped
     depends_on:
       - mongoCfg1 
       - mongoCfg2
