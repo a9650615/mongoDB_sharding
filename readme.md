@@ -14,3 +14,6 @@ Rs Router:
 sh.addShard("partdio/mongoS1,mongoS2")
 sh.addShard("partdio1/mongoS3,mongoS4")
 ```
+Refrerence:
+[For build sharding](https://dzone.com/articles/composing-a-sharded-mongodb-on-docker)
+[For test sharding](http://bboymars.coding.me/2018/04/01/mongodb_sharding_inDocker/)
