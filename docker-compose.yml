@@ -12,49 +12,39 @@ services:
     image: bitnami/mongodb:latest
     expose:
       - "27017"
-    # ports:
-    #   - "27017:27017"
     hostname: mongos1
     environment:
-      # MONGODB_USERNAME: test
-      # MONGODB_PASSWORD: 111222
       MONGODB_ROOT_PASSWORD: 111222
-      # MONGODB_DATABASE: test
     volumes:
       - ./config/shard:/opt/bitnami/mongodb/conf
-      - ./db/db1:/bitnami/mongodb
+      - ./db/db1/svr1:/bitnami/mongodb
   mongoS2:
     container_name: mongodb_shard2
     image: bitnami/mongodb:latest
     expose:
       - "27017"
-    # ports:
-    #   - "27018:27017"
     hostname: mongos2
-    # environment:
-      # MONGODB_USERNAME: test
-      # MONGODB_PASSWORD: 111222
-      # MONGODB_ROOT_PASSWORD: 111222
-      # MONGODB_DATABASE: test
     volumes:
       - ./config/shard:/opt/bitnami/mongodb/conf
-      - ./db/db2:/bitnami/mongodb
+      - ./db/db1/svr2:/bitnami/mongodb
   mongoS3:
     container_name: mongodb_shard3
     image: bitnami/mongodb:latest
     expose:
       - "27017"
-    # ports:
-    #   - "27019:27017"
     hostname: mongos3
-    # environment:
-      # MONGODB_USERNAME: test
-      # MONGODB_PASSWORD: 111222
-      # MONGODB_ROOT_PASSWORD: 111222
-      # MONGODB_DATABASE: test
     volumes:
-      - ./config/shard:/opt/bitnami/mongodb/conf
-      - ./db/db3:/bitnami/mongodb
+      - ./config/shard2:/opt/bitnami/mongodb/conf
+      - ./db/db2/svr3:/bitnami/mongodb
+  mongoS4:
+    container_name: mongodb_shard4
+    image: bitnami/mongodb:latest
+    expose:
+      - "27017"
+    hostname: mongos4
+    volumes:
+      - ./config/shard2:/opt/bitnami/mongodb/conf
+      - ./db/db2/svr4:/bitnami/mongodb
   mongoCfg1:
     container_name: mongodb_config1
     image: bitnami/mongodb:latest
@@ -70,30 +60,24 @@ services:
     #   MONGODB_DATABASE: test
     volumes:
       - ./config/config:/opt/bitnami/mongodb/conf
-      - ./db/config1:/bitnami/mongodb
-  # mongoCfg2:
-  #   container_name: mongodb_config2
-  #   image: bitnami/mongodb:latest
-  #   expose:
-  #     - "27017"
-  #   hostname: mongo
-  #   environment:
-  #     MONGODB_USERNAME: test
-  #     MONGODB_PASSWORD: 111222
-  #     MONGODB_ROOT_PASSWORD: 111222
-  #     MONGODB_DATABASE: test
-  #   volumes:
-  #     - ./config/config:/opt/bitnami/mongodb/conf
-  #     - ./db/config2:/bitnami/mongodb
-
+      - ./db/db1/config1:/bitnami/mongodb
+  mongoCfg2:
+    container_name: mongodb_config2
+    image: bitnami/mongodb:latest
+    expose:
+      - "27017"
+    hostname: mongoCfg2
+    volumes:
+      - ./config/config:/opt/bitnami/mongodb/conf
+      - ./db/db2/config2:/bitnami/mongodb
   mongos:
     container_name: mongos
     image: bitnami/mongodb:latest
     hostname: mongos
     depends_on:
       - mongoCfg1 
-      # - mongoCfg2
-    command: mongos --configdb partdioConf/mongoCfg1:27017 --port 3000 --bind_ip 0.0.0.0 
+      - mongoCfg2
+    command: mongos --configdb partdioConf/mongoCfg1:27017,mongoCfg2:27017 --port 3000 --bind_ip 0.0.0.0 
     ports:
         - "27023:3000"
     # expose:
