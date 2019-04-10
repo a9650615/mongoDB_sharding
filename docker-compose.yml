@@ -13,15 +13,15 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2'
-          memory: 3G
+          cpus: '4'
+          memory: 4G
     restart: unless-stopped
     expose:
       - "27017"
     hostname: mongos1
     environment:
       MONGODB_ROOT_PASSWORD: 111222
-      MONGODB_EXTRA_FLAGS: --wiredTigerCacheSizeGB=2
+      MONGODB_EXTRA_FLAGS: --wiredTigerCacheSizeGB=3
     volumes:
       - ./config/shard:/opt/bitnami/mongodb/conf
       - ./db/db1/svr1:/bitnami/mongodb
@@ -31,10 +31,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2'
-          memory: 3G
+          cpus: '4'
+          memory: 4G
     environment:
-      MONGODB_EXTRA_FLAGS: --wiredTigerCacheSizeGB=2
+      MONGODB_EXTRA_FLAGS: --wiredTigerCacheSizeGB=3
     restart: unless-stopped
     expose:
       - "27017"
@@ -48,10 +48,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2'
-          memory: 3G
+          cpus: '4'
+          memory: 4G
     environment:
-      MONGODB_EXTRA_FLAGS: --wiredTigerCacheSizeGB=2
+      MONGODB_EXTRA_FLAGS: --wiredTigerCacheSizeGB=3
     restart: unless-stopped
     expose:
       - "27017"
@@ -65,10 +65,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2'
-          memory: 3G
+          cpus: '4'
+          memory: 4G
     environment:
-      MONGODB_EXTRA_FLAGS: --wiredTigerCacheSizeGB=2
+      MONGODB_EXTRA_FLAGS: --wiredTigerCacheSizeGB=3
     restart: unless-stopped
     expose:
       - "27017"
@@ -119,8 +119,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2'
-          memory: 300M
+          cpus: '3'
+          memory: 400M
     hostname: mongos
     restart: unless-stopped
     depends_on:
