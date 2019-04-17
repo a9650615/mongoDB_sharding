@@ -120,7 +120,9 @@ services:
       resources:
         limits:
           cpus: '3'
-          memory: 1G
+          memory: 2G
+    environment:
+      MONGODB_EXTRA_FLAGS: --wiredTigerCacheSizeGB=1
     hostname: mongos
     restart: unless-stopped
     depends_on:
