@@ -122,7 +122,8 @@ services:
           cpus: '3'
           memory: 3G
     environment:
-      MONGODB_EXTRA_FLAGS: --wiredTigerCacheSizeGB=1
+      - MONGODB_DISABLE_SYSTEM_LOG=yes
+      - MONGODB_EXTRA_FLAGS=--wiredTigerCacheSizeGB=1
     hostname: mongos
     restart: unless-stopped
     depends_on:
