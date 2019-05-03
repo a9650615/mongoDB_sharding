@@ -116,13 +116,14 @@ services:
   mongos:
     container_name: mongos
     image: bitnami/mongodb:latest
+    logging:
+      driver: none 
     deploy:
       resources:
         limits:
           cpus: '3'
           memory: 3G
     environment:
-      - MONGODB_DISABLE_SYSTEM_LOG=yes
       - MONGODB_EXTRA_FLAGS=--wiredTigerCacheSizeGB=1
     hostname: mongos
     restart: unless-stopped
